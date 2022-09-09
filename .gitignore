@@ -4,6 +4,12 @@
 .gradle/
 /build/
 
+/buildSrc/build/
+/cache-api/build/
+/cache-api/bin/
+/cache-redis/build/
+/cache-redis/bin/
+
 ######################
 # Visual Studio Code
 ######################

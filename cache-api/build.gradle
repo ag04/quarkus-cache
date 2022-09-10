@@ -5,7 +5,11 @@
 plugins {
     id 'com.ag04.quarkus.java-library-conventions'
     id 'net.researchgate.release'
-//    id "org.kordamp.gradle.jandex" version "1.0.0"
+    id "org.kordamp.gradle.jandex" version "1.0.0"
+}
+
+jandex {
+    version = '2.2.1.Final'
 }
 
 dependencies {

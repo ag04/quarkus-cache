@@ -20,4 +20,4 @@ pluginManagement {
 }
 
 rootProject.name = 'quarkus-cache'
-include('app', 'cache-api', 'cache-redis')
+include('cache-api', 'cache-redis')

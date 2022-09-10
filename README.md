@@ -10,6 +10,14 @@ gh_username=your_github_usernam
 gh_token=value_of_your_personall_access_token_with_access_to_public_repositories
 ```
 
+**gh_token** should contain the value of (PAT) "personal access token" that has Access to public repositories.
+You can store this value in (1) .env file (do not forget to add this file to .gitignore!) or (2) configure system environment variable to save it.
+First option is the simplest for local development, while the second is more suitable for ci/cd workflows.
+
+For more see:
+* [Personal GitHub access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+
+
 ### Setup (First time)
 1. Clone the repository: `git clone git@github.com:ag04/quarkus-cache.git`
 4. Build project with: ` ./gradlew clean build `

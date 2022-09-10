@@ -20,6 +20,10 @@ dependencies {
 
 }
 
+jandex {
+    version = '2.4.0.Final'
+}
+
 release {
   tagTemplate = '${version}-cache-api'
   git {

@@ -21,6 +21,9 @@ dependencies {
 
 release {
   tagTemplate = '${version}-cache-api'
+  git {
+        requireBranch.set('master')
+  }
 }
 
 afterReleaseBuild.dependsOn publish

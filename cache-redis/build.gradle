@@ -13,7 +13,7 @@ dependencies {
 }
 
 release {
-  tagTemplate = '${version}-cache-api'
+  tagTemplate = '${version}-cache-redis'
   git {
         requireBranch.set('master')
   }

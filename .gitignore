@@ -113,4 +113,5 @@ Desktop.ini
 ######################
 !gradle/wrapper/gradle-wrapper.jar
 
-
+# hide github credentials
+.env

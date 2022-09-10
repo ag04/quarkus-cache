@@ -7,8 +7,24 @@ plugins {
     id 'net.researchgate.release'
 }
 
+def props = new Properties()
+file("../.env").withInputStream { props.load(it) }
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/ag04/cache-api")
+        credentials {
+            username = System.getenv("gh_username") ?: props.getProperty("gh_username")
+            password = System.getenv("gh_token") ?: props.getProperty("gh_token")
+        }
+    }
+}
+
 dependencies {
-    api project(':cache-api')
+    //api project(':cache-api')
+    api "com.ag04.quarkus:cache-api:${cacheApiVersion}"
     implementation "org.redisson:redisson-quarkus-20:${redissonVersion}"
 }
 

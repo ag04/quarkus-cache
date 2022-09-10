@@ -3,6 +3,13 @@
 
 
 ## Development
+
+To build this app localy, you need to create file named `.env` in the root folder with the following content:
+```
+gh_username=your_github_usernam
+gh_token=value_of_your_personall_access_token_with_access_to_public_repositories
+```
+
 ### Setup (First time)
 1. Clone the repository: `git clone git@github.com:ag04/quarkus-cache.git`
 4. Build project with: ` ./gradlew clean build `

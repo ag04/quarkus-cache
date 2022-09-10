@@ -4,7 +4,7 @@
 
 plugins {
     id 'com.ag04.quarkus.java-library-conventions'
-    id 'net.researchgate.release' version '2.8.1'
+    id 'net.researchgate.release'
 }
 
 dependencies {
@@ -17,6 +17,10 @@ dependencies {
     implementation 'jakarta.interceptor:jakarta.interceptor-api'
     implementation 'jakarta.enterprise:jakarta.enterprise.cdi-api'
 
+}
+
+release {
+  tagTemplate = '${version}-cache-api'
 }
 
 afterReleaseBuild.dependsOn publish

@@ -4,12 +4,16 @@
 
 plugins {
     id 'com.ag04.quarkus.java-library-conventions'
-    id 'net.researchgate.release' version '2.8.1'
+    id 'net.researchgate.release'
 }
 
 dependencies {
     api project(':cache-api')
     implementation "org.redisson:redisson-quarkus-20:${redissonVersion}"
+}
+
+release {
+  tagTemplate = '${version}-cache-api'
 }
 
 afterReleaseBuild.dependsOn publish

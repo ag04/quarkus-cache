@@ -14,7 +14,7 @@ Make sure that file gradle.properties in the folder ${USER_HOME}/.gradle/ contai
 * github_password : personal github token to be used to install/update packages
 
 1) Commit and push everything
-2) `./gradlew cache-api:release`
-3) `./gradlew cache-redis:release`
+2) `./gradlew cache-api:release` (to release new verison of cache-api)
+3) `./gradlew cache-redis:release` (to release new verison of cache-redis)
 
 And simply follow the instructions on the console for each of the libearies.

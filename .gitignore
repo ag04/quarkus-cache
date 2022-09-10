@@ -9,6 +9,8 @@
 /cache-api/bin/
 /cache-redis/build/
 /cache-redis/bin/
+/cache-infinispan/build/
+/cache-infinispan/bin/
 
 ######################
 # Visual Studio Code

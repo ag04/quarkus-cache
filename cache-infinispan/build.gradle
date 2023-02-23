@@ -14,7 +14,7 @@ repositories {
     mavenCentral()
     maven {
         name = "GitHubPackages"
-        url = uri("https://maven.pkg.github.com/ag04/cache-api")
+        url = uri("https://maven.pkg.github.com/wearenotch/cache-api")
         credentials {
             username = System.getenv("gh_username") ?: props.getProperty("gh_username")
             password = System.getenv("gh_token") ?: props.getProperty("gh_token")

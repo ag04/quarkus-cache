@@ -1,21 +1,20 @@
 package com.ag04.quarkus.cache.interceptor;
 
+import com.ag04.quarkus.cache.*;
+import com.ag04.quarkus.cache.annotation.CacheKey;
 import org.jboss.logging.Logger;
 
-import javax.interceptor.Interceptor.Priority;
-
-import java.lang.reflect.InvocationTargetException;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
-import java.lang.reflect.Method;
+import javax.interceptor.Interceptor.Priority;
 import javax.interceptor.InvocationContext;
-
-import com.ag04.quarkus.cache.CompositeCacheKey;
-import com.ag04.quarkus.cache.DefaultCacheKey;
-import com.ag04.quarkus.cache.CacheKeyGenerator;
-import com.ag04.quarkus.cache.CacheManager;
-import com.ag04.quarkus.cache.UndefinedCacheKeyGenerator;
-import com.ag04.quarkus.cache.CacheException;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
 public abstract class BaseCacheInterceptor {
     private static final Logger log = Logger.getLogger(BaseCacheInterceptor.class);
@@ -41,6 +40,8 @@ public abstract class BaseCacheInterceptor {
         } else if (methodParameterValues == null || methodParameterValues.length == 0) {
             // If the intercepted method doesn't have any parameter, then the default cache key will be used.
             return getDefaultKey(cacheName);
+        } else if (paramsAreAnnotated(context.getMethod().getParameterAnnotations())) {
+               return new CompositeCacheKey(extractAnnotatedParamValues(context));
         } else if (methodParameterValues.length == 1) {
             // If the intercepted method has exactly one parameter, then this parameter will be used as the cache key.
             return methodParameterValues[0];
@@ -49,6 +50,26 @@ public abstract class BaseCacheInterceptor {
             // will be used.
             return new CompositeCacheKey(methodParameterValues);
         }
+    }
+
+    private Object[] extractAnnotatedParamValues(InvocationContext context) {
+        Annotation[][] allAnnotations = context.getMethod().getParameterAnnotations();
+        Object[] parameters = context.getParameters();
+
+        List<Object> annotatedParams = new ArrayList<>();
+        for (int i = 0; i < allAnnotations.length; i++) {
+            List<Annotation> annotations = Arrays.asList(allAnnotations[i]);
+            boolean isParamAnnotated = annotations.stream().anyMatch(ann -> ann.annotationType().equals(CacheKey.class));
+            if (isParamAnnotated) {
+                annotatedParams.add(parameters[i]);
+            }
+        }
+
+        return annotatedParams.toArray();
+    }
+
+    private boolean paramsAreAnnotated(Annotation[][] annotations) {
+        return Arrays.stream(annotations).flatMap(Stream::of).anyMatch(p -> p.annotationType().equals(CacheKey.class));
     }
 
     private Object getDefaultKey(String cacheName) {

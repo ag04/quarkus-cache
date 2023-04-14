@@ -1,5 +1,6 @@
 package com.ag04.quarkus.cache;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Arrays;
  * This file is taken from: https://github.com/quarkusio/quarkus/blob/main/extensions/cache/runtime/src/main/java/io/quarkus/cache/CompositeCacheKey.java
  * 
  */
-public class CompositeCacheKey {
+public class CompositeCacheKey implements Serializable {
     private final Object[] keyElements;
 
     /**
